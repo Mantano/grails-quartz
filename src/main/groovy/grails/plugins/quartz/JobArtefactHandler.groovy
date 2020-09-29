@@ -44,20 +44,20 @@ public class JobArtefactHandler extends ArtefactHandlerAdapter {
         super(TYPE, GrailsJobClass.class, DefaultGrailsJobClass.class, TYPE)
     }
 
-    boolean isArtefact(ClassNode classNode) {
-        if(classNode == null ||
-           !isValidArtefactClassNode(classNode, classNode.getModifiers()) ||
-           !classNode.getName().endsWith(DefaultGrailsJobClass.JOB) ||
-           !classNode.getMethods(GrailsJobClassConstants.EXECUTE)) {
+    boolean isArtefact( ClassNode classNode ) {
+        if (classNode == null ||
+                !isValidArtefactClassNode(classNode, classNode.getModifiers()) ||
+                !classNode.getName().endsWith(DefaultGrailsJobClass.JOB) ||
+                !classNode.getMethods(GrailsJobClassConstants.EXECUTE)) {
             return false
         }
 
         URL url = GrailsASTUtils.getSourceUrl(classNode)
 
-        url &&  JOB_PATH_PATTERN.matcher(url.getFile()).find()
+        url && JOB_PATH_PATTERN.matcher(url.getFile()).find()
     }
 
-    boolean isArtefactClass(Class clazz) {
+    boolean isArtefactClass( Class clazz ) {
         // class shouldn't be null and should ends with Job suffix
         if (clazz == null || !clazz.getName().endsWith(DefaultGrailsJobClass.JOB)) return false
         // and should have one of execute() or execute(JobExecutionContext) methods defined

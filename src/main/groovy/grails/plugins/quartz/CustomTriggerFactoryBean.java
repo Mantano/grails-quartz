@@ -47,11 +47,11 @@ public class CustomTriggerFactoryBean implements FactoryBean<Trigger>, Initializ
         customTrigger = BeanUtils.instantiateClass(triggerClass);
 
         // If trigger is a standard trigger, set standard properties
-        if(customTrigger instanceof AbstractTrigger){
-            AbstractTrigger at =(AbstractTrigger) customTrigger;
+        if (customTrigger instanceof AbstractTrigger) {
+            AbstractTrigger at = (AbstractTrigger) customTrigger;
 
             // Set job details
-            if(jobDetail!=null){
+            if (jobDetail != null) {
                 at.setJobKey(jobDetail.getKey());
             }
 

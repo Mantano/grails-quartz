@@ -1,9 +1,9 @@
 package grails.plugins.quartz.cleanup
 
 import groovy.sql.Sql
-import groovy.util.logging.Slf4j;
+import groovy.util.logging.Slf4j
 
-import javax.annotation.PostConstruct;
+import javax.annotation.PostConstruct
 
 /**
  * Contributed by Rocketmiles
@@ -38,7 +38,7 @@ public class JdbcCleanup {
 
         def sql = new Sql(dataSource)
         queries.each { query ->
-                log.info("Executing " + query)
+            log.info("Executing " + query)
             sql.execute(query)
         }
 

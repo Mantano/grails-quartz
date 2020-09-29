@@ -35,10 +35,10 @@ class JobDescriptor {
 
     List<TriggerDescriptor> triggerDescriptors
 
-    static build(JobDetail jobDetail, Scheduler scheduler) {
+    static build( JobDetail jobDetail, Scheduler scheduler ) {
         def job = new JobDescriptor(jobDetail: jobDetail)
-        job.triggerDescriptors = (List <TriggerDescriptor>)scheduler.getTriggersOfJob(jobDetail.key).collect { trigger ->
-            TriggerDescriptor.build(job, (Trigger)trigger, scheduler)
+        job.triggerDescriptors = (List<TriggerDescriptor>) scheduler.getTriggersOfJob(jobDetail.key).collect { trigger ->
+            TriggerDescriptor.build(job, (Trigger) trigger, scheduler)
         }
         return job
     }

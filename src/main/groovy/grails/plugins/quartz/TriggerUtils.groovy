@@ -16,12 +16,7 @@
 package grails.plugins.quartz
 
 import groovy.transform.CompileStatic
-import org.quartz.CronScheduleBuilder
-import org.quartz.CronTrigger
-import org.quartz.SimpleScheduleBuilder
-import org.quartz.SimpleTrigger
-import org.quartz.Trigger
-import org.quartz.TriggerBuilder
+import org.quartz.*
 
 /**
  * The util class which helps to build triggers for schedule methods.
@@ -34,7 +29,7 @@ class TriggerUtils {
         "GRAILS_" + UUID.randomUUID().toString()
     }
 
-    static Trigger buildDateTrigger(String jobName, String jobGroup, Date scheduleDate) {
+    static Trigger buildDateTrigger( String jobName, String jobGroup, Date scheduleDate ) {
         return TriggerBuilder.newTrigger()
                 .withIdentity(generateTriggerName(), GrailsJobClassConstants.DEFAULT_TRIGGERS_GROUP)
                 .withPriority(6)
@@ -43,7 +38,7 @@ class TriggerUtils {
                 .build()
     }
 
-    static SimpleTrigger buildSimpleTrigger(String jobName, String jobGroup, long repeatInterval, int repeatCount) {
+    static SimpleTrigger buildSimpleTrigger( String jobName, String jobGroup, long repeatInterval, int repeatCount ) {
         return TriggerBuilder.newTrigger()
                 .withIdentity(generateTriggerName(), GrailsJobClassConstants.DEFAULT_TRIGGERS_GROUP)
                 .withPriority(6)
@@ -52,7 +47,7 @@ class TriggerUtils {
                 .build()
     }
 
-    static CronTrigger buildCronTrigger(String jobName, String jobGroup, String cronExpression) {
+    static CronTrigger buildCronTrigger( String jobName, String jobGroup, String cronExpression ) {
         return TriggerBuilder.newTrigger()
                 .withIdentity(generateTriggerName(), GrailsJobClassConstants.DEFAULT_TRIGGERS_GROUP)
                 .withPriority(6)

@@ -16,10 +16,7 @@
 
 package grails.plugins.quartz.listeners;
 
-import grails.core.GrailsApplication;
-
 import grails.persistence.support.PersistenceContextInterceptor;
-import grails.util.Holders;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.JobExecutionContext;

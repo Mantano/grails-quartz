@@ -38,14 +38,14 @@ class TriggersConfigBuilder extends BuilderSupport {
 
     def triggers = [:]
 
-    TriggersConfigBuilder(String jobName) {
+    TriggersConfigBuilder( String jobName ) {
         this.jobName = jobName
     }
 
     /**
      * Evaluate triggers closure
      */
-    def build(closure) {
+    def build( closure ) {
         closure.delegate = this
         closure.call()
         return triggers
@@ -58,7 +58,7 @@ class TriggersConfigBuilder extends BuilderSupport {
      * @param attributes trigger attributes
      * @return trigger definitions
      */
-    Expando createTrigger(name, Map attributes) {
+    Expando createTrigger( name, Map attributes ) {
         def triggerClass
 
         def triggerAttributes = attributes ? new HashMap(attributes) : [:]
@@ -81,7 +81,7 @@ class TriggersConfigBuilder extends BuilderSupport {
                     throw new Exception("Custom trigger must have 'triggerClass' attribute")
                 }
                 triggerClass = (Class) triggerAttributes.remove('triggerClass')
-                if (!Trigger.isAssignableFrom(triggerClass)){
+                if (!Trigger.isAssignableFrom(triggerClass)) {
                     throw new Exception("Custom trigger class must implement org.quartz.Trigger class.")
                 }
                 break
@@ -98,7 +98,7 @@ class TriggersConfigBuilder extends BuilderSupport {
      * @param old or new trigger type
      * @return new trigger type
      */
-    private String normalizeTriggerType(name) {
+    private String normalizeTriggerType( name ) {
         def triggerType = name
 
         if (triggerType == 'simpleTrigger') {
@@ -114,10 +114,10 @@ class TriggersConfigBuilder extends BuilderSupport {
         triggerType
     }
 
-    private prepareCommonTriggerAttributes(Map triggerAttributes) {
+    private prepareCommonTriggerAttributes( Map triggerAttributes ) {
         def prepare = prepareTriggerAttribute.curry(triggerAttributes)
 
-        if(triggerAttributes[Constants.NAME] == null) {
+        if (triggerAttributes[Constants.NAME] == null) {
             triggerAttributes[Constants.NAME] = "${jobName}${triggerNumber++}".toString()
         }
 
@@ -140,7 +140,7 @@ class TriggersConfigBuilder extends BuilderSupport {
         )
     }
 
-    private prepareSimpleTriggerAttributes(Map triggerAttributes) {
+    private prepareSimpleTriggerAttributes( Map triggerAttributes ) {
         def prepare = prepareTriggerAttribute.curry(triggerAttributes)
 
         // Process the old deprecated property "timeout"
@@ -193,7 +193,7 @@ class TriggersConfigBuilder extends BuilderSupport {
         )
     }
 
-    private prepareCronTriggerAttributes(Map triggerAttributes) {
+    private prepareCronTriggerAttributes( Map triggerAttributes ) {
         prepareTriggerAttribute(
                 triggerAttributes,
                 Constants.CRON_EXPRESSION,
@@ -208,8 +208,8 @@ class TriggersConfigBuilder extends BuilderSupport {
         )
     }
 
-    private prepareTriggerAttribute = {Map attributes, String name, defaultValue, validate = {} ->
-        if(attributes[name] == null){
+    private prepareTriggerAttribute = { Map attributes, String name, defaultValue, validate = {} ->
+        if (attributes[name] == null) {
             attributes[name] = defaultValue
         }
         validate(attributes[name])
@@ -218,35 +218,35 @@ class TriggersConfigBuilder extends BuilderSupport {
     /**
      * Does nothing. Implements the BuilderSupport method.
      */
-    protected void setParent(parent, child) {
+    protected void setParent( parent, child ) {
         // Nothing!
     }
 
     /**
      * Implements the BuilderSupport method.
      */
-    protected createNode(name) {
+    protected createNode( name ) {
         createNode(name, null, null)
     }
 
     /**
      * Implements the BuilderSupport method.
      */
-    protected createNode(name, value) {
+    protected createNode( name, value ) {
         createNode(name, null, value)
     }
 
     /**
      * Implements the BuilderSupport method.
      */
-    protected createNode(name, Map attributes) {
+    protected createNode( name, Map attributes ) {
         createNode(name, attributes, null)
     }
 
     /**
      * Create a trigger. Implements the BuilderSupport method.
      */
-    protected Object createNode(name, Map attributes, Object value) {
+    protected Object createNode( name, Map attributes, Object value ) {
         def trigger = createTrigger(name, attributes)
         triggers[trigger.triggerAttributes.name.toString()] = trigger
         trigger

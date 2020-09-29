@@ -29,15 +29,15 @@ class TriggersConfigBuilderTests extends GroovyTestCase {
         def builder = new TriggersConfigBuilder('TestJob')
         def closure = {
             simple()
-            simple timeout:1000
-            simple startDelay:500
-            simple startDelay:500, timeout: 1000
-            simple startDelay:500, timeout: 1000, repeatCount: 3
-            simple name: 'everySecond', timeout:1000
+            simple timeout: 1000
+            simple startDelay: 500
+            simple startDelay: 500, timeout: 1000
+            simple startDelay: 500, timeout: 1000, repeatCount: 3
+            simple name: 'everySecond', timeout: 1000
             cron()
-            cron cronExpression:'0 15 6 * * ?'
-            cron name: 'myTrigger', cronExpression:'0 15 6 * * ?'
-            simple startDelay:500, timeout: 1000, repeatCount: 0
+            cron cronExpression: '0 15 6 * * ?'
+            cron name: 'myTrigger', cronExpression: '0 15 6 * * ?'
+            simple startDelay: 500, timeout: 1000, repeatCount: 0
         }
         builder.build(closure)
 
@@ -46,112 +46,112 @@ class TriggersConfigBuilderTests extends GroovyTestCase {
         def triggerName = 'TestJob0'
         assert builder.triggers[triggerName]?.clazz == CustomTriggerFactoryBean
         assertPropertiesEquals(new Expando(
-                name:triggerName,
+                name: triggerName,
                 group: Constants.DEFAULT_TRIGGERS_GROUP,
                 startDelay: Constants.DEFAULT_START_DELAY,
                 repeatInterval: Constants.DEFAULT_REPEAT_INTERVAL,
                 repeatCount: Constants.DEFAULT_REPEAT_COUNT,
-            ), builder.triggers[triggerName].triggerAttributes
+        ), builder.triggers[triggerName].triggerAttributes
         )
 
         triggerName = 'TestJob1'
         assert builder.triggers[triggerName]?.clazz == CustomTriggerFactoryBean
         assertPropertiesEquals(new Expando(
-                name:triggerName,
+                name: triggerName,
                 group: Constants.DEFAULT_TRIGGERS_GROUP,
                 startDelay: Constants.DEFAULT_START_DELAY,
                 repeatInterval: 1000,
                 repeatCount: Constants.DEFAULT_REPEAT_COUNT,
-            ), builder.triggers[triggerName].triggerAttributes
+        ), builder.triggers[triggerName].triggerAttributes
         )
 
         triggerName = 'TestJob2'
         assert builder.triggers[triggerName]?.clazz == CustomTriggerFactoryBean
         assertPropertiesEquals(new Expando(
-                name:triggerName,
+                name: triggerName,
                 group: Constants.DEFAULT_TRIGGERS_GROUP,
                 startDelay: 500,
                 repeatInterval: Constants.DEFAULT_REPEAT_INTERVAL,
                 repeatCount: Constants.DEFAULT_REPEAT_COUNT,
-            ), builder.triggers[triggerName].triggerAttributes
+        ), builder.triggers[triggerName].triggerAttributes
         )
 
         triggerName = 'TestJob3'
         assert builder.triggers[triggerName]?.clazz == CustomTriggerFactoryBean
         assertPropertiesEquals(new Expando(
-                name:triggerName,
+                name: triggerName,
                 group: Constants.DEFAULT_TRIGGERS_GROUP,
                 startDelay: 500,
                 repeatInterval: 1000,
                 repeatCount: Constants.DEFAULT_REPEAT_COUNT,
-            ), builder.triggers[triggerName].triggerAttributes
+        ), builder.triggers[triggerName].triggerAttributes
         )
 
         triggerName = 'TestJob4'
         assert builder.triggers[triggerName]?.clazz == CustomTriggerFactoryBean
         assertPropertiesEquals(new Expando(
-                name:triggerName,
+                name: triggerName,
                 group: Constants.DEFAULT_TRIGGERS_GROUP,
                 startDelay: 500,
                 repeatInterval: 1000,
                 repeatCount: 3,
-            ), builder.triggers[triggerName].triggerAttributes
+        ), builder.triggers[triggerName].triggerAttributes
         )
 
         triggerName = 'everySecond'
         assert builder.triggers[triggerName]?.clazz == CustomTriggerFactoryBean
         assertPropertiesEquals(new Expando(
-                name:triggerName,
+                name: triggerName,
                 group: Constants.DEFAULT_TRIGGERS_GROUP,
                 startDelay: Constants.DEFAULT_START_DELAY,
                 repeatInterval: 1000,
                 repeatCount: Constants.DEFAULT_REPEAT_COUNT,
-            ), builder.triggers[triggerName].triggerAttributes
+        ), builder.triggers[triggerName].triggerAttributes
         )
 
         triggerName = 'TestJob5'
         assert builder.triggers[triggerName]?.clazz == CustomTriggerFactoryBean
         assertPropertiesEquals(new Expando(
-                name:triggerName,
+                name: triggerName,
                 group: Constants.DEFAULT_TRIGGERS_GROUP,
-                startDelay:Constants.DEFAULT_START_DELAY,
+                startDelay: Constants.DEFAULT_START_DELAY,
                 cronExpression: Constants.DEFAULT_CRON_EXPRESSION,
-            ), builder.triggers[triggerName].triggerAttributes
+        ), builder.triggers[triggerName].triggerAttributes
         )
 
         triggerName = 'TestJob6'
         assert builder.triggers[triggerName]?.clazz == CustomTriggerFactoryBean
         assertPropertiesEquals(new Expando(
-                name:triggerName,
+                name: triggerName,
                 group: Constants.DEFAULT_TRIGGERS_GROUP,
                 cronExpression: '0 15 6 * * ?',
                 startDelay: Constants.DEFAULT_START_DELAY,
-            ), builder.triggers[triggerName].triggerAttributes
+        ), builder.triggers[triggerName].triggerAttributes
         )
 
         triggerName = 'myTrigger'
         assert builder.triggers[triggerName]?.clazz == CustomTriggerFactoryBean
         assertPropertiesEquals(new Expando(
-                name:triggerName,
+                name: triggerName,
                 group: Constants.DEFAULT_TRIGGERS_GROUP,
                 startDelay: Constants.DEFAULT_START_DELAY,
                 cronExpression: '0 15 6 * * ?',
-            ), builder.triggers[triggerName].triggerAttributes
+        ), builder.triggers[triggerName].triggerAttributes
         )
 
         triggerName = 'TestJob7'
         assert builder.triggers[triggerName]?.clazz == CustomTriggerFactoryBean
         assertPropertiesEquals(new Expando(
-                name:triggerName,
+                name: triggerName,
                 group: Constants.DEFAULT_TRIGGERS_GROUP,
                 startDelay: 500,
                 repeatInterval: 1000,
                 repeatCount: 0,
-            ), builder.triggers[triggerName].triggerAttributes
+        ), builder.triggers[triggerName].triggerAttributes
         )
     }
 
-    private static assertPropertiesEquals(expected, actual) {
+    private static assertPropertiesEquals( expected, actual ) {
         expected.properties.each { entry ->
             assert actual[entry.key] == entry.value, "Unexpected value for property: ${entry.key}"
         }

@@ -1,15 +1,12 @@
 package grails.plugins.quartz
 
-import static junit.framework.Assert.assertEquals
-import static junit.framework.Assert.assertFalse
-import static junit.framework.Assert.assertNull
-import static junit.framework.Assert.assertTrue
-
 import grails.core.GrailsApplication
 import org.junit.Test
 import org.quartz.JobDetail
 import org.quartz.JobKey
 import org.springframework.beans.BeanWrapper
+
+import static junit.framework.Assert.*
 
 /**
  * Tests for the JobDetailFactoryBean
@@ -23,16 +20,16 @@ class JobDetailFactoryBeanTests {
     JobDetailFactoryBean factory = new JobDetailFactoryBean()
 
     @Test
-    void testFactory1(){
+    void testFactory1() {
         factory.jobClass = new GrailsJobClassMock(
                 [
-                        fullName:JOB_NAME,
-                        group:JOB_GROUP,
-                        concurrent:true,
-                        durability:true,
-                        sessionRequired:true,
-                        requestsRecovery:true,
-                        description: JOB_DESCRIPTION
+                        fullName        : JOB_NAME,
+                        group           : JOB_GROUP,
+                        concurrent      : true,
+                        durability      : true,
+                        sessionRequired : true,
+                        requestsRecovery: true,
+                        description     : JOB_DESCRIPTION
                 ]
         )
         factory.afterPropertiesSet()
@@ -47,15 +44,15 @@ class JobDetailFactoryBeanTests {
     }
 
     @Test
-    void testFactory2(){
+    void testFactory2() {
         factory.jobClass = new GrailsJobClassMock(
                 [
-                        fullName:JOB_NAME,
-                        group:JOB_GROUP,
-                        concurrent:false,
-                        durability:false,
-                        sessionRequired:false,
-                        requestsRecovery:false
+                        fullName        : JOB_NAME,
+                        group           : JOB_GROUP,
+                        concurrent      : false,
+                        durability      : false,
+                        sessionRequired : false,
+                        requestsRecovery: false
                 ]
         )
         factory.afterPropertiesSet()
@@ -80,11 +77,17 @@ class GrailsJobClassMock implements GrailsJobClass {
     String description
 
     void execute() {}
+
     Map getTriggers() {}
+
     boolean byName() { false }
+
     boolean byType() { false }
+
     boolean getAvailable() { false }
+
     boolean isAbstract() { false }
+
     GrailsApplication getGrailsApplication() {}
 
     @Override
@@ -92,29 +95,41 @@ class GrailsJobClassMock implements GrailsJobClass {
         return null
     }
 
-    Object getPropertyValue(String name) {}
-    boolean hasProperty(String name) { false }
+    Object getPropertyValue( String name ) {}
+
+    boolean hasProperty( String name ) { false }
+
     Object newInstance() {}
+
     String getName() {}
+
     String getShortName() {}
+
     String getPropertyName() {}
+
     String getLogicalPropertyName() {}
+
     String getNaturalName() {}
+
     String getPackageName() {}
+
     Class getClazz() {}
+
     BeanWrapper getReference() {}
+
     Object getReferenceInstance() {}
-    def <T> T getPropertyValue(String name, Class<T> type) {}
+
+    def <T> T getPropertyValue( String name, Class<T> type ) {}
 
     @Override
     String getPluginName() {
         return null
     }
 
-    void setGrailsApplication(GrailsApplication grailsApplication) {}
+    void setGrailsApplication( GrailsApplication grailsApplication ) {}
 
     @Override
-    void setGrailsApplication(grails.core.GrailsApplication grailsApplication) {
+    void setGrailsApplication( grails.core.GrailsApplication grailsApplication ) {
 
     }
 }

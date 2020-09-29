@@ -22,23 +22,23 @@ class MockDoWithSpring {
     def application = [jobClasses: null, config: new ConfigObject()]
     def manager
 
-    def ref(whatever) {
+    def ref( whatever ) {
         null
     }
 
-    def quartzJobFactory(whatever) {
+    def quartzJobFactory( whatever ) {
         null
     }
 
-    def exceptionPrinterListener(whatever) {
+    def exceptionPrinterListener( whatever ) {
         null
     }
 
-    def sessionBinderListener(something, whatever) {
+    def sessionBinderListener( something, whatever ) {
         null
     }
 
-    void quartzScheduler(whatever, Closure props) {
+    void quartzScheduler( whatever, Closure props ) {
         def data = [:]
         props.delegate = data
         props.resolveStrategy = Closure.DELEGATE_FIRST

@@ -1,14 +1,8 @@
 package grails.plugins.quartz
 
 import grails.plugins.quartz.config.TriggersConfigBuilder
-
 import org.junit.Test
-import org.quartz.CronTrigger
-import org.quartz.DailyTimeIntervalTrigger
-import org.quartz.DateBuilder
-import org.quartz.SimpleTrigger
-import org.quartz.TimeOfDay
-import org.quartz.Trigger
+import org.quartz.*
 import org.quartz.impl.triggers.DailyTimeIntervalTriggerImpl
 
 /**
@@ -25,7 +19,7 @@ class CustomTriggerFactoryBeanTests {
     void testFactory() {
         def builder = new TriggersConfigBuilder('TestJob')
         def closure = {
-            simple name: 'simple', group:'group', startDelay: 500, repeatInterval: 1000, repeatCount: 3
+            simple name: 'simple', group: 'group', startDelay: 500, repeatInterval: 1000, repeatCount: 3
             cron name: 'cron', group: 'group', cronExpression: CRON_EXPRESSION
             custom name: 'custom', group: 'group', triggerClass: DailyTimeIntervalTriggerImpl,
                     startTimeOfDay: START_TIME, endTimeOfDay: END_TIME,

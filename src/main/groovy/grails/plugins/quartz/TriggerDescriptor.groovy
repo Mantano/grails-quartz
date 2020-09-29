@@ -35,7 +35,7 @@ class TriggerDescriptor {
 
     Trigger.TriggerState state
 
-    static build(JobDescriptor jobDescriptor, Trigger trigger, Scheduler scheduler) {
+    static build( JobDescriptor jobDescriptor, Trigger trigger, Scheduler scheduler ) {
         def result = new TriggerDescriptor(jobDescriptor: jobDescriptor, trigger: trigger)
         result.state = scheduler.getTriggerState(trigger.key)
         return result

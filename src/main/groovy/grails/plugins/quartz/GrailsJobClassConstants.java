@@ -31,7 +31,8 @@ import org.quartz.SimpleTrigger;
 public final class GrailsJobClassConstants {
 
     // restrict instantiation
-    private GrailsJobClassConstants() {}
+    private GrailsJobClassConstants() {
+    }
 
     public static final String EXECUTE = "execute";
 

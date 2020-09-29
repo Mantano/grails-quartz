@@ -33,6 +33,7 @@ import java.text.MessageFormat;
  * <p>
  * It is used by the quartz scheduler to create an instance of the job class for executing.
  * </p>
+ *
  * @author Sergey Nebolsin (nebolsin@gmail.com)
  * @since 0.3.2
  */
